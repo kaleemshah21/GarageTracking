@@ -23,8 +23,12 @@ namespace GarageTracking.Pages.Bookings
 
         public async Task OnGetAsync()
         {
+            //only gets the bookings with status in progress or waiting
             Booking = await _context.Bookings
-                .Include(b => b.Vehicle).ToListAsync();
+            .Include(b => b.Vehicle)
+            .Where(b => b.Status == GarageTracking.Models.Booking.BookingStatus.Waiting ||
+                    b.Status == GarageTracking.Models.Booking.BookingStatus.InProgress)
+            .ToListAsync();
         }
     }
 }
