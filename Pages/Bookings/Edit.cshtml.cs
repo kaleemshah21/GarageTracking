@@ -83,6 +83,24 @@ namespace GarageTracking.Pages.Bookings
 
             try
             {
+                if (Booking.Status == Booking.BookingStatus.Done)
+                {
+                    // Checks if an invoice already exists for this booking
+                    bool invoiceExists = await _context.Invoices.AnyAsync(i => i.BookingID == Booking.BookingID);
+                    if (!invoiceExists)
+                    {
+                        // Creates an invoice for the booking
+                        var invoice = new Invoice
+                        {
+                            BookingID = Booking.BookingID,
+                            InvoiceDate = DateTime.Now,
+                            Booking = Booking
+                        };
+
+                        // adds the invoice
+                        _context.Invoices.Add(invoice);
+                    }
+                }
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
