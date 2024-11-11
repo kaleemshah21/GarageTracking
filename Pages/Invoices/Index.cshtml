@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Invoices</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -19,7 +19,18 @@
             <th>
                 @Html.DisplayNameFor(model => model.Invoice[0].Booking)
             </th>
-            <th></th>
+            <th>
+                Customer Name
+            </th>
+            <th>
+                Vehicle Registration
+            </th>
+            <th>
+                Service Date
+            </th>
+            <th>
+                Service Type
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +41,18 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Booking.BookingID)
+            </td>
+            <td>
+                @($"{item.Booking.Vehicle.Customer.FirstName} {item.Booking.Vehicle.Customer.LastName}")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Booking.Vehicle.Registration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Booking.ServiceDate) 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Booking.ServiceType)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.InvoiceID">Edit</a> |

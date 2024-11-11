@@ -28,14 +28,19 @@ namespace GarageTracking.Pages.Invoices
                 return NotFound();
             }
 
-            var invoice = await _context.Invoices.FirstOrDefaultAsync(m => m.InvoiceID == id);
-            if (invoice == null)
+            Invoice = await _context.Invoices
+                .Include(i => i.Booking)
+                    .ThenInclude(b => b.Vehicle)
+                    .ThenInclude(v => v.Customer)
+                .FirstOrDefaultAsync(m => m.InvoiceID == id);
+
+            if (Invoice == null)
             {
                 return NotFound();
             }
             else
             {
-                Invoice = invoice;
+                Invoice = Invoice;
             }
             return Page();
         }

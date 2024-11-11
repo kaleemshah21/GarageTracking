@@ -23,8 +23,13 @@ namespace GarageTracking.Pages.Invoices
 
         public async Task OnGetAsync()
         {
+
             Invoice = await _context.Invoices
-                .Include(i => i.Booking).ToListAsync();
+                .Include(i => i.Booking)
+                    .ThenInclude(b => b.Vehicle)
+                        .ThenInclude(v => v.Customer)
+                .ToListAsync();
+
         }
     }
 }

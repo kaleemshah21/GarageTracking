@@ -23,6 +23,42 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Invoice.Booking.BookingID)
         </dd>
+        <dt class="col-sm-2">
+            Customer Name
+        </dt>
+        <dd class="col-sm-10">
+            @($"{Model.Invoice.Booking.Vehicle.Customer.FirstName} {Model.Invoice.Booking.Vehicle.Customer.LastName}")
+        </dd>
+        <dt class="col-sm-2">
+            Car Make
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Invoice.Booking.Vehicle.CarMake
+        </dd>
+        <dt class="col-sm-2">
+            Car Model
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Invoice.Booking.Vehicle.CarModel
+        </dd>
+        <dt class="col-sm-2">
+            Registration
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Invoice.Booking.Vehicle.Registration
+        </dd>
+        <dt class="col-sm-2">
+            Service Date
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Invoice.Booking.ServiceDate
+        </dd>
+        <dt class="col-sm-2">
+            Service Type
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Invoice.Booking.ServiceType
+        </dd>
     </dl>
 </div>
 <div>
