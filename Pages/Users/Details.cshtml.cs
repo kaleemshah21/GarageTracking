@@ -9,9 +9,9 @@ using GarageTracking.Data;
 using GarageTracking.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace GarageTracking.Pages.Vehicles
+namespace GarageTracking.Pages.Users
 {
-    [Authorize(Policy = "RequireUserRole")]
+    [Authorize(Policy = "RequireAdminRole")]
     public class DetailsModel : PageModel
     {
         private readonly GarageTracking.Data.TrackingContext _context;
@@ -21,7 +21,7 @@ namespace GarageTracking.Pages.Vehicles
             _context = context;
         }
 
-        public Vehicle Vehicle { get; set; } = default!;
+        public User User { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,16 +30,14 @@ namespace GarageTracking.Pages.Vehicles
                 return NotFound();
             }
 
-            var vehicle = await _context.Vehicles
-                .Include(v => v.Customer) // Include the Customer in the query
-                .FirstOrDefaultAsync(m => m.VehicleId == id);
-            if (vehicle == null)
+            var user = await _context.Users.FirstOrDefaultAsync(m => m.UserID == id);
+            if (user == null)
             {
                 return NotFound();
             }
             else
             {
-                Vehicle = vehicle;
+                User = user;
             }
             return Page();
         }

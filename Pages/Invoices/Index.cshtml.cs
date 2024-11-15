@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using GarageTracking.Data;
 using GarageTracking.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GarageTracking.Pages.Invoices
 {

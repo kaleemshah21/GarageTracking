@@ -10,9 +10,9 @@ using GarageTracking.Data;
 using GarageTracking.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace GarageTracking.Pages.Vehicles
+namespace GarageTracking.Pages.Users
 {
-    [Authorize(Policy = "RequireUserRole")]
+    [Authorize(Policy = "RequireAdminRole")]
     public class EditModel : PageModel
     {
         private readonly GarageTracking.Data.TrackingContext _context;
@@ -23,7 +23,8 @@ namespace GarageTracking.Pages.Vehicles
         }
 
         [BindProperty]
-        public Vehicle Vehicle { get; set; } = default!;
+        public User User { get; set; } = default!;
+        public SelectList RoleSelectList { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -32,17 +33,13 @@ namespace GarageTracking.Pages.Vehicles
                 return NotFound();
             }
 
-            var vehicle =  await _context.Vehicles.FirstOrDefaultAsync(m => m.VehicleId == id);
-            if (vehicle == null)
+            var user =  await _context.Users.FirstOrDefaultAsync(m => m.UserID == id);
+            if (user == null)
             {
                 return NotFound();
             }
-            Vehicle = vehicle;
-            ViewData["CustomerID"] = new SelectList(_context.Customers.Select(c => new
-            {
-                c.CustomerID,
-                FullName = c.FirstName + " " + c.LastName
-            }), "CustomerID", "FullName");
+            User = user;
+            RoleSelectList = new SelectList(new List<string> { "Admin", "User" });
             return Page();
         }
 
@@ -52,10 +49,11 @@ namespace GarageTracking.Pages.Vehicles
         {
             if (!ModelState.IsValid)
             {
+                RoleSelectList = new SelectList(new List<string> { "Admin", "User" });
                 return Page();
             }
 
-            _context.Attach(Vehicle).State = EntityState.Modified;
+            _context.Attach(User).State = EntityState.Modified;
 
             try
             {
@@ -63,7 +61,7 @@ namespace GarageTracking.Pages.Vehicles
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!VehicleExists(Vehicle.VehicleId))
+                if (!UserExists(User.UserID))
                 {
                     return NotFound();
                 }
@@ -76,9 +74,9 @@ namespace GarageTracking.Pages.Vehicles
             return RedirectToPage("./Index");
         }
 
-        private bool VehicleExists(int id)
+        private bool UserExists(int id)
         {
-            return _context.Vehicles.Any(e => e.VehicleId == id);
+            return _context.Users.Any(e => e.UserID == id);
         }
     }
 }

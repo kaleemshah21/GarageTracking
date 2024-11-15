@@ -18,12 +18,14 @@ namespace GarageTracking.Data
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>().ToTable("Customer");
             modelBuilder.Entity<Booking>().ToTable("Booking");
             modelBuilder.Entity<Invoice>().ToTable("Invoice");
+
 
 
             // Customer and Vehicle relationship

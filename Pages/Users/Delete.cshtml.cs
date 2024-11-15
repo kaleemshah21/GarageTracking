@@ -9,7 +9,7 @@ using GarageTracking.Data;
 using GarageTracking.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace GarageTracking.Pages.Invoices
+namespace GarageTracking.Pages.Users
 {
     [Authorize(Policy = "RequireAdminRole")]
     public class DeleteModel : PageModel
@@ -22,7 +22,7 @@ namespace GarageTracking.Pages.Invoices
         }
 
         [BindProperty]
-        public Invoice Invoice { get; set; } = default!;
+        public User User { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -31,15 +31,15 @@ namespace GarageTracking.Pages.Invoices
                 return NotFound();
             }
 
-            var invoice = await _context.Invoices.FirstOrDefaultAsync(m => m.InvoiceID == id);
+            var user = await _context.Users.FirstOrDefaultAsync(m => m.UserID == id);
 
-            if (invoice == null)
+            if (user == null)
             {
                 return NotFound();
             }
             else
             {
-                Invoice = invoice;
+                User = user;
             }
             return Page();
         }
@@ -51,11 +51,11 @@ namespace GarageTracking.Pages.Invoices
                 return NotFound();
             }
 
-            var invoice = await _context.Invoices.FindAsync(id);
-            if (invoice != null)
+            var user = await _context.Users.FindAsync(id);
+            if (user != null)
             {
-                Invoice = invoice;
-                _context.Invoices.Remove(Invoice);
+                User = user;
+                _context.Users.Remove(User);
                 await _context.SaveChangesAsync();
             }
 

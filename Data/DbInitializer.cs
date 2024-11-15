@@ -34,6 +34,24 @@ namespace GarageTracking.Data
                 new Vehicle { CustomerID = customers[4].CustomerID, CarMake = "Nissan", CarModel = "Altima", Registration = "MNO345" }
             };
 
+            if (!context.Users.Any())
+            {
+                // Seed Admin User
+                string adminUsername = "kaleemshah21";
+                string adminPassword = "1234"; // Default password in plaintext
+
+                var adminUser = new User
+                {
+                    Username = adminUsername,
+                    PasswordHash = adminPassword, // Storing plaintext password
+                    Role = "Admin"
+                };
+
+                context.Users.Add(adminUser);
+                context.SaveChanges();
+            }
+
+
             context.Vehicles.AddRange(vehicles);
             context.SaveChanges();
 

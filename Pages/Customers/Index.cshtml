@@ -5,7 +5,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Customers</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -14,10 +14,14 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].LastName)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.LastNameSort">
+                    @Html.DisplayNameFor(model => model.Customer[0].LastName)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer[0].FirstName)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.FirstNameSort">
+                    @Html.DisplayNameFor(model => model.Customer[0].FirstName)     
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Customer[0].Street)

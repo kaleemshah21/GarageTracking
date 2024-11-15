@@ -9,9 +9,9 @@ using GarageTracking.Data;
 using GarageTracking.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace GarageTracking.Pages.Invoices
+namespace GarageTracking.Pages.Users
 {
-    [Authorize(Policy = "RequireUserRole")]
+    [Authorize(Policy = "RequireAdminRole")]
     public class CreateModel : PageModel
     {
         private readonly GarageTracking.Data.TrackingContext _context;
@@ -20,25 +20,31 @@ namespace GarageTracking.Pages.Invoices
         {
             _context = context;
         }
+        public IEnumerable<SelectListItem> RoleList { get; set; }
 
         public IActionResult OnGet()
         {
-        ViewData["BookingID"] = new SelectList(_context.Bookings, "BookingID", "BookingID");
+            RoleList = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "User", Text = "User" },
+                new SelectListItem { Value = "Admin", Text = "Admin" }
+            };
             return Page();
         }
 
         [BindProperty]
-        public Invoice Invoice { get; set; } = default!;
+        public User User { get; set; } = default!;
 
         // For more information, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
+                ModelState.AddModelError("User.Role", "Please select a valid role.");
                 return Page();
             }
 
-            _context.Invoices.Add(Invoice);
+            _context.Users.Add(User);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

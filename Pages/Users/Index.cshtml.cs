@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using GarageTracking.Data;
 using GarageTracking.Models;
+using Microsoft.AspNetCore.Authorization;
 
-namespace GarageTracking.Pages.Bookings
+namespace GarageTracking.Pages.Users
 {
+    [Authorize(Policy = "RequireAdminRole")]
     public class IndexModel : PageModel
     {
         private readonly GarageTracking.Data.TrackingContext _context;
@@ -19,17 +21,11 @@ namespace GarageTracking.Pages.Bookings
             _context = context;
         }
 
-
-        public IList<Booking> Booking { get;set; } = default!;
+        public IList<User> User { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            //only gets the bookings with status in progress or waiting
-            Booking = await _context.Bookings
-            .Include(b => b.Vehicle)
-            .Where(b => b.Status == GarageTracking.Models.Booking.BookingStatus.Waiting ||
-                    b.Status == GarageTracking.Models.Booking.BookingStatus.InProgress)
-            .ToListAsync();
+            User = await _context.Users.ToListAsync();
         }
     }
 }

@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GarageTracking.Data;
 using GarageTracking.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GarageTracking.Pages.Bookings
 {
+    [Authorize(Policy = "RequireUserRole")]
     public class EditModel : PageModel
     {
         private readonly GarageTracking.Data.TrackingContext _context;

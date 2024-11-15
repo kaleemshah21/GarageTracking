@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using GarageTracking.Data;
 using GarageTracking.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GarageTracking.Pages.Bookings
 {
+    [Authorize(Policy = "RequireAdminRole")]
     public class DeleteModel : PageModel
     {
         private readonly GarageTracking.Data.TrackingContext _context;

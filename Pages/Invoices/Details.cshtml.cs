@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using GarageTracking.Data;
 using GarageTracking.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GarageTracking.Pages.Invoices
 {
+    [Authorize(Policy = "RequireUserRole")]
     public class DetailsModel : PageModel
     {
         private readonly GarageTracking.Data.TrackingContext _context;

@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using GarageTracking.Data;
 using GarageTracking.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GarageTracking.Pages.Vehicles
 {
+    [Authorize(Policy = "RequireUserRole")]
     public class CreateModel : PageModel
     {
         private readonly GarageTracking.Data.TrackingContext _context;
