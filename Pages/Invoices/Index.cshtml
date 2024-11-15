@@ -14,22 +14,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Invoice[0].InvoiceDate)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.InvoiceDateSort">Invoice Date</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Invoice[0].Booking)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.BookingIDSort">Booking ID</a>
             </th>
             <th>
-                Customer Name
+                <a asp-page="./Index" asp-route-sortOrder="@Model.CustomerSort">Customer Name</a>
             </th>
             <th>
-                Vehicle Registration
+                <a asp-page="./Index" asp-route-sortOrder="@Model.VehicleRegistrationSort">Vehicle Registration</a>
             </th>
             <th>
-                Service Date
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ServiceDateSort">Service Date</a>
             </th>
             <th>
-                Service Type
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ServiceTypeSort">Service Type</a>
             </th>
         </tr>
     </thead>

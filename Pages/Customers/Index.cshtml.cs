@@ -28,25 +28,28 @@ namespace GarageTracking.Pages.Customers
 
         public async Task OnGetAsync(string sortOrder)
         {
-            LastNameSort = String.IsNullOrEmpty(sortOrder) ? "lname_desc" : "";
-            FirstNameSort = sortOrder == "fname_desc" ? "fname_asc" : "fname_desc";
+            LastNameSort = sortOrder == "lname_asc" || String.IsNullOrEmpty(sortOrder) ? "lname_desc" : "lname_asc";
+            FirstNameSort = sortOrder == "fname_asc" || String.IsNullOrEmpty(sortOrder) ? "fname_desc" : "fname_asc";
 
             IQueryable<Customer> customersIQ = from s in _context.Customers
                                                select s;
 
             switch (sortOrder)
             {
+                case "lname_asc":
+                    customersIQ = customersIQ.OrderBy(c => c.LastName);
+                    break;
                 case "lname_desc":
-                    customersIQ = customersIQ.OrderByDescending(s => s.LastName);
+                    customersIQ = customersIQ.OrderByDescending(c => c.LastName);
                     break;
                 case "fname_asc":
-                    customersIQ = customersIQ.OrderBy(s => s.FirstName);
+                    customersIQ = customersIQ.OrderBy(c => c.FirstName);
                     break;
                 case "fname_desc":
-                    customersIQ = customersIQ.OrderByDescending(s => s.FirstName);
+                    customersIQ = customersIQ.OrderByDescending(c => c.FirstName);
                     break;
                 default:
-                    customersIQ = customersIQ.OrderBy(s => s.LastName); // Default sort by Last Name
+                    customersIQ = customersIQ.OrderBy(c => c.LastName); // Default sorting
                     break;
             }
 

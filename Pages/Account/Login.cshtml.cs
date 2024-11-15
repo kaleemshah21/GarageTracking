@@ -40,7 +40,7 @@ namespace GarageTracking.Pages.Account
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.Username == Username);
 
-            if (user != null && Password == user.PasswordHash)
+            if (user != null && Password == user.Password)
             {
                 
                 var claims = new List<Claim>

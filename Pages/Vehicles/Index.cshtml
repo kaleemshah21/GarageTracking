@@ -14,16 +14,26 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Vehicle[0].CarMake)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.CarMakeSort">
+                    @Html.DisplayNameFor(model => model.Vehicle[0].CarMake)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Vehicle[0].CarModel)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.CarModelSort">
+                    @Html.DisplayNameFor(model => model.Vehicle[0].CarModel)
+                </a>
+
+            </th>
+            
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.RegistrationSort">
+                    @Html.DisplayNameFor(model => model.Vehicle[0].Registration)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Vehicle[0].Registration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Vehicle[0].Customer)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.CustomerSort">
+                    @Html.DisplayNameFor(model => model.Vehicle[0].Customer)
+                </a>
             </th>
             <th></th>
         </tr>

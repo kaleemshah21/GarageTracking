@@ -14,19 +14,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Booking[0].ServiceType)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ServiceTypeSort">Service Type</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Booking[0].ServiceDate)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ServiceDateSort">Service Date</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Booking[0].Price)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.PriceSort">Price</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Booking[0].Status)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.StatusSort">Status</a>
             </th>
             <th>
-                Vehicle Registration
+                <a asp-page="./Index" asp-route-sortOrder="@Model.RegistrationSort">Vehicle Registration</a>
             </th>
             <th></th>
         </tr>
@@ -46,9 +46,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Vehicle.Registration)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vehicle.Registration)
+            </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.BookingID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.BookingID">Details</a> |

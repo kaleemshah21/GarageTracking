@@ -4,7 +4,7 @@
     {
         public int UserID { get; set; }
         public string Username { get; set; }
-        public string PasswordHash { get; set; } // Stores a hashed password
+        public string Password { get; set; }
         public string Role { get; set; }
     }
 }
