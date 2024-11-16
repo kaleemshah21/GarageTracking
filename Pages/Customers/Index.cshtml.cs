@@ -14,25 +14,49 @@ namespace GarageTracking.Pages.Customers
     public class IndexModel : PageModel
     {
         private readonly GarageTracking.Data.TrackingContext _context;
+        private readonly IConfiguration Configuration;
 
-
-        public IndexModel(GarageTracking.Data.TrackingContext context)
+        public IndexModel(GarageTracking.Data.TrackingContext context, IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
         }
 
+       
+
+        
+
+
+        public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
         public string LastNameSort { get; set; }
         public string FirstNameSort { get; set; }
-        public IList<Customer> Customer { get; set; } = default!;
+        public PaginatedList<Customer> Customer { get; set; } = default!;
 
-        public async Task OnGetAsync(string sortOrder)
+        public async Task OnGetAsync(string sortOrder, string searchString,string currentFilter,int? pageIndex)
         {
             LastNameSort = sortOrder == "lname_asc" || String.IsNullOrEmpty(sortOrder) ? "lname_desc" : "lname_asc";
             FirstNameSort = sortOrder == "fname_asc" || String.IsNullOrEmpty(sortOrder) ? "fname_desc" : "fname_asc";
 
+
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            CurrentFilter = searchString;
+
             IQueryable<Customer> customersIQ = from s in _context.Customers
                                                select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                customersIQ = customersIQ.Where(s => s.LastName.Contains(searchString)
+                                       || s.FirstName.Contains(searchString));
+            }
 
             switch (sortOrder)
             {
@@ -54,7 +78,11 @@ namespace GarageTracking.Pages.Customers
             }
 
 
-            Customer = await customersIQ.AsNoTracking().ToListAsync();
+            //Customer = await customersIQ.AsNoTracking().ToListAsync();
+
+            var pageSize = Configuration.GetValue("PageSize", 4);
+            Customer = await PaginatedList<Customer>.CreateAsync(
+               customersIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
         }
     }
 }

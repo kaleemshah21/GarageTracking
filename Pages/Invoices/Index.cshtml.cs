@@ -16,11 +16,15 @@ namespace GarageTracking.Pages.Invoices
     {
         private readonly GarageTracking.Data.TrackingContext _context;
 
-        public IndexModel(GarageTracking.Data.TrackingContext context)
+        private readonly IConfiguration Configuration;
+
+        public IndexModel(GarageTracking.Data.TrackingContext context, IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
         }
 
+        public string CurrentFilter { get; set; }
         public string CurrentSort { get; set; }
         public string InvoiceDateSort { get; set; }
         public string BookingIDSort { get; set; }
@@ -29,9 +33,9 @@ namespace GarageTracking.Pages.Invoices
         public string ServiceDateSort { get; set; }
         public string ServiceTypeSort { get; set; }
 
-        public IList<Invoice> Invoice { get;set; } = default!;
+        public PaginatedList<Invoice> Invoice { get;set; } = default!;
 
-        public async Task OnGetAsync(string sortOrder)
+        public async Task OnGetAsync(string sortOrder, string searchString, string currentFilter, int? pageIndex)
         {
 
             CurrentSort = sortOrder;
@@ -42,11 +46,26 @@ namespace GarageTracking.Pages.Invoices
             ServiceDateSort = sortOrder == "service_date_asc" ? "service_date_desc" : "service_date_asc";
             ServiceTypeSort = sortOrder == "service_type_asc" ? "service_type_desc" : "service_type_asc";
 
+            if (searchString != null)
+            {
+                pageIndex = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
             IQueryable<Invoice> invoicesIQ = from i in _context.Invoices
                                               .Include(i => i.Booking)
                                               .ThenInclude(b => b.Vehicle)
                                               .ThenInclude(v => v.Customer)
                                              select i;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                invoicesIQ = invoicesIQ.Where(s => s.Booking.Vehicle.Customer.LastName.Contains(searchString)
+                                       || s.Booking.Vehicle.Customer.FirstName.Contains(searchString));
+            }
 
             switch (sortOrder)
             {
@@ -92,8 +111,10 @@ namespace GarageTracking.Pages.Invoices
             }
 
 
-            Invoice = await invoicesIQ.AsNoTracking().ToListAsync();
-
+            //Invoice = await invoicesIQ.AsNoTracking().ToListAsync();
+            var pageSize = Configuration.GetValue("PageSize", 4);
+            Invoice = await PaginatedList<Invoice>.CreateAsync(
+               invoicesIQ.AsNoTracking(), pageIndex ?? 1, pageSize);
         }
     }
 }

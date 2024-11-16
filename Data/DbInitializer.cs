@@ -103,11 +103,11 @@ namespace GarageTracking.Data
             var users = new List<User>
             {
                 new User { Username = "admin", Password = "admin123", Role = "Admin" },
-                new User { Username = "employee1", Password = "emp123", Role = "Employee" },
-                new User { Username = "employee2", Password = "emp123", Role = "Employee" },
-                new User { Username = "employee3", Password = "emp123", Role = "Employee" },
-                new User { Username = "employee4", Password = "emp123", Role = "Employee" },
-                new User { Username = "employee5", Password = "emp123", Role = "Employee" }
+                new User { Username = "employee1", Password = "emp123", Role = "User" },
+                new User { Username = "employee2", Password = "emp123", Role = "User" },
+                new User { Username = "employee3", Password = "emp123", Role = "User" },
+                new User { Username = "employee4", Password = "emp123", Role = "User" },
+                new User { Username = "employee5", Password = "emp123", Role = "User" }
             };
 
             context.Users.AddRange(users);
