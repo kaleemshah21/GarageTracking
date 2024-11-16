@@ -20,3 +20,47 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+
+/*Navbar*/
+.navbar {
+    background-color: #ffffff; 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/*navbar items*/
+.navbar .navbar-nav .nav-item .nav-link {
+    color: #555;
+    font-size: 1.3rem;
+    padding: 12px 20px;
+    position: relative;
+    transition: color 0.3s;
+}
+
+/*Hover effect*/
+.navbar .navbar-nav .nav-item .nav-link:hover {
+    color: #007bff;
+}
+
+/*Create an line slider under navbar items*/
+.navbar .navbar-nav .nav-item .nav-link::after {
+    content: '';
+    position: absolute; 
+    left: 0;
+    bottom: -4px;
+    width: 0%; 
+    height: 3px;
+    background-color: #007bff;
+    transition: width 0.3s ease, left 0.3s ease;
+}
+
+        
+.navbar .navbar-nav .nav-item .nav-link:hover::after {
+    width: 100%; 
+    left: 0%; 
+}
+
+.navbar-brand {
+    padding-right:12px;
+}
