@@ -64,3 +64,185 @@ body {
 .navbar-brand {
     padding-right:12px;
 }
+
+
+
+/* Table styles */
+table.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc; /* Light grey border */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table.table thead {
+    background-color: #6c757d; /* Grey background for the header */
+    color: white; /* White text for contrast */
+    text-align: left;
+    font-weight: bold;
+}
+
+table.table th,
+table.table td {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+table.table tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* Very light grey for even rows */
+}
+
+table.table tbody tr:hover {
+    background-color: #e0e0e0; /* Slightly darker grey on hover */
+}
+
+/* Button styles */
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 5px 0;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #6c757d; /* Grey background for primary buttons */
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #5a6268; /* Darker grey on hover */
+}
+
+.btn.disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+    background-color: #b0b0b0; /* Light grey for disabled buttons */
+}
+
+/* Form styles */
+.form-actions {
+    margin-bottom: 20px;
+}
+
+    .form-actions p {
+        margin: 0;
+    }
+
+input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    width: 200px;
+    margin-right: 10px;
+}
+
+input[type="submit"] {
+    background-color: #6c757d; /* Grey background for submit button */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #5a6268; /* Darker grey on hover */
+}
+
+/* Links inside the table */
+table.table a {
+    color: #343a40; /* Dark grey for links */
+    text-decoration: none;
+    margin-right: 8px;
+}
+
+table.table a:hover {
+    color: #212529; /*darker grey on hover */
+    text-decoration: underline;
+}
+
+
+.btn-grey {
+    color: #6c757d; /* Grey color for the text */
+    background-color: #e0e0e0; /* Light grey background */
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-grey:hover {
+    background-color: #d0d0d0; /* Slightly darker grey on hover */
+    color: #343a40; /* Darker grey text on hover */
+}
+
+
+
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.login-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px !important;
+    height: auto !important; 
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.login-label {
+    font-size: 14px;
+    color: #343a40;
+}
+
+.login-form-control {
+    display: block;
+    width: 100% !important;
+    padding: 10px;
+    font-size: 14px;
+    color: #212529;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.login-btn {
+    display: inline-block;
+    width: 100% !important;
+    padding: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #6c757d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .login-btn:hover {
+        background-color: #5a6268;
+    }
+

@@ -3,17 +3,20 @@
 
 <h2>Login</h2>
 
-<form method="post">
-    <div class="form-group">
-        <label asp-for="Username"></label>
-        <input asp-for="Username" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
+<div class="login-form-container">
+    <form method="post" class="login-form">
+        <div class="form-group login-username-group">
+            <label asp-for="Username" class="login-label"></label>
+            <input asp-for="Username" class="login-form-control" />
+        </div>
+        <div class="form-group login-password-group">
+            <label asp-for="Password" class="login-label"></label>
+            <input asp-for="Password" type="password" class="login-form-control" />
+        </div>
+        <button type="submit" class="btn login-btn">Login</button>
+    </form>
+</div>
+
 
 @section Scripts {
     <script type="text/javascript">
