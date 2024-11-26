@@ -9,7 +9,7 @@
             Done
         }
         public int BookingID { get; set; }
-        public int? VehicleID { get; set; }
+        public int VehicleID { get; set; }
         public string ServiceType { get; set; }
         public DateTime ServiceDate { get; set; }
         public Decimal Price { get; set; }

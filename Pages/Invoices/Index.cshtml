@@ -43,6 +43,9 @@
             <th>
                 <a asp-page="./Index" asp-route-sortOrder="@Model.ServiceTypeSort">Service Type</a>
             </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.PriceSort">Price</a>
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -67,6 +70,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Booking.ServiceType)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Booking.Price)
+                </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.InvoiceID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.InvoiceID">Details</a> |

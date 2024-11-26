@@ -32,6 +32,8 @@ namespace GarageTracking.Pages.Invoices
         public string VehicleRegistrationSort { get; set; }
         public string ServiceDateSort { get; set; }
         public string ServiceTypeSort { get; set; }
+        public string PriceSort { get; set; }
+
 
         public PaginatedList<Invoice> Invoice { get;set; } = default!;
 
@@ -45,6 +47,7 @@ namespace GarageTracking.Pages.Invoices
             VehicleRegistrationSort = sortOrder == "vehicle_registration_asc" ? "vehicle_registration_desc" : "vehicle_registration_asc";
             ServiceDateSort = sortOrder == "service_date_asc" ? "service_date_desc" : "service_date_asc";
             ServiceTypeSort = sortOrder == "service_type_asc" ? "service_type_desc" : "service_type_asc";
+            PriceSort = sortOrder == "price_sort_asc" ? "price_sort_dsc" : "price_sort_asc";
 
             if (searchString != null)
             {
@@ -104,6 +107,12 @@ namespace GarageTracking.Pages.Invoices
                     break;
                 case "service_type_desc":
                     invoicesIQ = invoicesIQ.OrderByDescending(i => i.Booking.ServiceType);
+                    break;
+                case "price_sort_asc":
+                    invoicesIQ = invoicesIQ.OrderBy(i => i.Booking.Price);
+                    break;
+                case "price_sort_desc":
+                    invoicesIQ = invoicesIQ.OrderByDescending(i => i.Booking.Price);
                     break;
                 default:
                     invoicesIQ = invoicesIQ.OrderBy(i => i.InvoiceDate); // Default sorting by InvoiceDate
