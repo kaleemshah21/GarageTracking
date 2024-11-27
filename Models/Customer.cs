@@ -15,15 +15,16 @@ namespace GarageTracking.Models
         [StringLength(50, ErrorMessage = "First Name cannot exceed 50 characters.")]
         public string FirstName { get; set; }
 
+        [Required(ErrorMessage = "Street is Required.")]
         [StringLength(100, ErrorMessage = "Street address cannot exceed 100 characters.")]
         public string Street { get; set; }
 
         [Required(ErrorMessage = "Post Code is required.")]
-        [RegularExpression(@"^\d{5}(-\d{4})?$", ErrorMessage = "Invalid Post Code format.")]
+        [StringLength(10, ErrorMessage = "Postcode cannot exceed 10 characters.")]
         public string PostCode { get; set; }
 
         [Required(ErrorMessage = "Email is required.")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address.")]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", ErrorMessage = "Invalid email address format.")]
         public string Email { get; set; }
 
         [Phone(ErrorMessage = "Invalid Phone Number.")]
