@@ -30,14 +30,12 @@ namespace GarageTracking.Pages.Customers
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FirstOrDefaultAsync(m => m.CustomerID == id);
-            if (customer == null)
+            Customer = await _context.Customers
+                .Include(c => c.Vehicles) // Include related vehicles
+                .FirstOrDefaultAsync(m => m.CustomerID == id);
+            if (Customer == null)
             {
                 return NotFound();
-            }
-            else
-            {
-                Customer = customer;
             }
             return Page();
         }

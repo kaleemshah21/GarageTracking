@@ -49,6 +49,41 @@
         </dd>
     </dl>
 </div>
+
+<h4>Vehicles</h4>
+<hr />
+@if (Model.Customer.Vehicles != null && Model.Customer.Vehicles.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Car Make</th>
+                <th>Car Model</th>
+                <th>Registration</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vehicle in Model.Customer.Vehicles)
+            {
+                <tr>
+                    <td>@vehicle.CarMake</td>
+                    <td>@vehicle.CarModel</td>
+                    <td>@vehicle.Registration</td>
+                    <td>
+                        <a asp-page="/Vehicles/Details" asp-route-id="@vehicle.VehicleId">Details</a> |
+                        <a asp-page="/Vehicles/Edit" asp-route-id="@vehicle.VehicleId">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No vehicles found for this customer.</p>
+}
+
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Customer.CustomerID">Edit</a> |
     <a asp-page="./Index">Back to List</a>
